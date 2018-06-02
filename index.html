@@ -8,18 +8,19 @@
   <title>Implementatino of indexOf method</title>
 
   <link rel="stylesheet" href="./styles/reset.css">
-  <link rel="stylesheet" href="./styles/variables.css">
-  <link rel="stylesheet" href="./styles/HeaderPage.css">
-  <link rel="stylesheet" href="./styles/Section.css">
-  <link rel="stylesheet" href="./styles/Code.css">
-  <link rel="stylesheet" href="./styles/utilities.css">
+  <link rel="stylesheet" href="styles/utils/variables.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components/HeaderPage.css">
+  <link rel="stylesheet" href="styles/components/Section.css">
+  <link rel="stylesheet" href="styles/components/Code.css">
+  <link rel="stylesheet" href="styles/utils/utilities.css">
 
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 </head>
-<body>
 
+<body>
   <header class="HeaderPage">
     <h1 class="HeaderPage-mainTitle">
       Implementation
@@ -45,7 +46,7 @@
     </nav>
   </header>
 
-  <main class="content">
+  <main class="main-content">
     <div class="Section">
       <h2 class="Section-title">Goal</h2>
       <p class="Section-paragraph">Implement the method of the String.prototype indexOf</p>
@@ -63,28 +64,65 @@
     <div class="Section">
       <h2 class="Section-title">Proposal</h2>
       <p class="Section-paragraph">
-        The first thing I thought about was to create the needed <span class="u-highlight">guard clauses</span> so I would let the main algorithm logic
-        <span class="u-highlight">clean from all the concerns</span> that would only make it dirtier
+        The first thing came to my mind were the <span class="u-highlight">guard clauses</span> that helped me to <span class="u-highlight">isolate</span> the code not related to the algorithm itself.
+        Doing this, instead of nested conditionals we got a "flat" list of conditionals, one after the other. It makes the code easier to read too.
       </p>
-      <figure class="Code u-vertical-space-top">
-        <pre>
-          <code>
-            <span class="Code-comments">// Truncate `from` because we can't secure that it's an integer</span>
-            <span class="Code-keyword">var</span> _fromTruncated = <span class="Code-keyword">Math</span><span class="Code-punctuation">.</span>trunc<span class="Code-punctuation">(</span>from<span class="Code-punctuation">);</span>
-            <span class="Code-keyword">if</span> <span class="Code-punctuation">(</span>searchValue <span class="Code-punctuation">===</span> <span class="Code-string">''</span> <span class="Code-punctuation">&&</span> _fromTruncated <span class="Code-punctuation"><</span> 0<span class="Code-punctuation">) {</span>
-              <span class="Code-keyword">return</span> 0;
+
+      <p class="Section-paragraph u-vertical-space-top">
+        The idea behind my solution is to iterate until we find a match with the first letter of the string we are looking for.<br>
+        If we don't find any, we return -1. If we do, we start to check the other character of the given string.
+      </p>
+
+      <p class="Section-paragraph u-vertical-space-top">
+        Once we have found the first character, if the given string has <span class="u-highlight">length === 1</span> it means we can return that index. If there are more characters to check, we go for it.<br>
+      </p>
+
+      <p class="Section-paragraph u-vertical-space-top">
+        If the next character to check is different than the character in <span class="u-highlight">this</span> we leave from that second loop and we go for another match with the first character of the given word.
+      </p>
+
+      <pre class="Code u-vertical-space-top">
+        <code>
+          <span class="Code-comments">// Truncate `from` because we can't secure that it's an integer</span>
+          <span class="Code-keyword">var</span> _fromTruncated = <span class="Code-keyword">Math</span><span class="Code-punctuation">.</span>trunc<span class="Code-punctuation">(</span>from<span class="Code-punctuation">);</span>
+          <span class="Code-keyword">if</span> <span class="Code-punctuation">(</span>searchValue <span class="Code-punctuation">===</span> <span class="Code-string">''</span> <span class="Code-punctuation">&&</span> _fromTruncated <span class="Code-punctuation"><</span> 0<span class="Code-punctuation">) {</span>
+            <span class="Code-keyword">return</span> 0<span class="Code-punctuation">;</span>
+          <span class="Code-punctuation">}</span>
+
+          <span class="Code-keyword">if</span> <span class="Code-punctuation">(</span>searchValue <span class="Code-punctuation">===</span> <span class="Code-string">''</span> <span class="Code-punctuation">&&</span> _fromTruncated <span class="Code-punctuation">>=</span> <span class="Code-keyword">this</span><span class="Code-punctuation">.</span>length<span class="Code-punctuation">) {</span>
+            <span class="Code-keyword">return</span> <span class="Code-keyword">this</span><span class="Code-punctuation">.</span>length<span class="Code-punctuation">;</span>
+          <span class="Code-punctuation">}</span>
+
+          <span class="Code-keyword">if</span> <span class="Code-punctuation">(</span>searchValue <span class="Code-punctuation">===</span> <span class="Code-string">''</span><span class="Code-punctuation">) {</span>
+            <span class="Code-keyword">return</span> _fromTruncated<span class="Code-punctuation">;</span>
+          <span class="Code-punctuation">}</span>
+
+          <span class="Code-keyword">for</span> <span class="Code-punctuation">(</span><span class="Code-keyword">var</span> i <span class="Code-punctuation">=</span> _fromTruncated<span class="Code-punctuation">;</span> i <span class="Code-punctuation"><</span> this<span class="Code-punctuation">.</span>length<span class="Code-punctuation">;</span> i++<span class="Code-punctuation">)</span> {
+            <span class="Code-keyword">var</span> thisCharsLeft <span class="Code-punctuation">=</span> this.length - i<span class="Code-punctuation">;</span>
+            <span class="Code-keyword">if</span> <span class="Code-punctuation">(</span>this<span class="Code-punctuation">[</span>i<span class="Code-punctuation">]</span> <span class="Code-punctuation">===</span> searchValue<span class="Code-punctuation">[</span>0<span class="Code-punctuation">]</span><span class="Code-punctuation">)</span> {
+              <span class="Code-keyword">var</span> initial = i<span class="Code-punctuation">;</span>
+              <span class="Code-keyword">if</span> <span class="Code-punctuation">(</span>searchValue.length <span class="Code-punctuation">===</span> 1<span class="Code-punctuation">)</span> <span class="Code-punctuation">{</span>
+                <span class="Code-keyword">return</span> initial<span class="Code-punctuation">;</span>
+
+                <span class="Code-punctuation">}</span> <span class="Code-keyword">else if</span> <span class="Code-punctuation">(</span>thisCharsLeft > searchValue.length - 1<span class="Code-punctuation">)</span> <span class="Code-punctuation">{</span>
+                  <span class="Code-keyword">for</span> <span class="Code-punctuation">(</span><span class="Code-keyword">var</span> j = 1<span class="Code-punctuation">;</span> j < searchValue.length<span class="Code-punctuation">;</span> j++<span class="Code-punctuation">)</span> <span class="Code-punctuation">{</span>
+                    <span class="Code-keyword">if</span> <span class="Code-punctuation">(</span>this[++i] !== searchValue[j]<span class="Code-punctuation">)</span> <span class="Code-punctuation">{</span>
+                      <span class="Code-keyword">break</span><span class="Code-punctuation">;</span>
+                    <span class="Code-punctuation">}</span> <span class="Code-keyword">else if</span> <span class="Code-punctuation">(</span>j <span class="Code-punctuation">===</span> <span class="Code-punctuation">(</span>searchValue.length - 1<span class="Code-punctuation">)</span>) <span class="Code-punctuation">{</span>
+                      <span class="Code-keyword">return</span> initial<span class="Code-punctuation">;</span>
+                    <span class="Code-punctuation">}</span>
+                  <span class="Code-punctuation">}</span>
+                <span class="Code-punctuation">}</span>
+              <span class="Code-punctuation">}</span>
             <span class="Code-punctuation">}</span>
 
-            <span class="Code-keyword">if</span> <span class="Code-punctuation">(</span>searchValue <span class="Code-punctuation">===</span> <span class="Code-string">''</span> <span class="Code-punctuation">&&</span> _fromTruncated <span class="Code-punctuation">>=</span> <span class="Code-keyword">this</span><span class="Code-punctuation">.</span>length<span class="Code-punctuation">) {</span>
-              <span class="Code-keyword">return</span> <span class="Code-keyword">this</span><span class="Code-punctuation">.</span>length;
-            <span class="Code-punctuation">}</span>
+            <span class="Code-keyword">return</span> -1<span class="Code-punctuation">;</span>
+          <span class="Code-punctuation">}</span><span class="Code-punctuation">;</span>
 
-            <span class="Code-keyword">if</span> <span class="Code-punctuation">(</span>searchValue <span class="Code-punctuation">===</span> <span class="Code-string">''</span><span class="Code-punctuation">) {</span>
-              <span class="Code-keyword">return</span> _fromTruncated<span class="Code-punctuation">;</span>
-            <span class="Code-punctuation">}</span>
-          </code>
-        </pre>
-      </figure>
+
+
+        </code>
+      </pre>
     </div>
   </main>
 
