@@ -1,0 +1,37 @@
+.Code {
+  background-color: rgba(238, 238, 238, 0.35);
+  background-color: #2B3A42;
+  overflow: auto;
+  padding: 0;
+  border-radius: 3px;
+  font-family: var(--font-family-monospace);
+  font-size: 13px;
+  line-height: 19px;
+}
+
+.Code code {
+  display: block;
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent;
+  text-shadow: 0 1px 0 rgba(23, 31, 35, 0.5);
+  color: var(--color-code-default);
+}
+
+.Code-comments {
+  color: var(--color-code-commments);
+}
+
+.Code-string {
+  color: var(--color-code-string);
+}
+
+.Code-keyword {
+  color: var(--color-code-keyword);
+}
+
+.Code-punctuation {
+  color: var(--color-code-punctuation);
+}

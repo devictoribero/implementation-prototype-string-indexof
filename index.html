@@ -8,8 +8,11 @@
   <title>Implementatino of indexOf method</title>
 
   <link rel="stylesheet" href="./styles/reset.css">
+  <link rel="stylesheet" href="./styles/variables.css">
   <link rel="stylesheet" href="./styles/HeaderPage.css">
   <link rel="stylesheet" href="./styles/Section.css">
+  <link rel="stylesheet" href="./styles/Code.css">
+  <link rel="stylesheet" href="./styles/utilities.css">
 
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
@@ -47,8 +50,43 @@
       <h2 class="Section-title">Goal</h2>
       <p class="Section-paragraph">Implement the method of the String.prototype indexOf</p>
     </div>
-  </main>
 
+    <div class="Section">
+      <h2 class="Section-title">Definition</h2>
+      <p class="Section-paragraph">
+        The <span class="u-highlight">indexOf()</span> method returns the index within the calling <span class="u-highlight">String</span> object of
+        the first occurrence of the specified value, starting the search at <span class="u-highlight">fromIndex</span>.
+        Returns -1 if the value is not found.
+      </p>
+    </div>
+
+    <div class="Section">
+      <h2 class="Section-title">Proposal</h2>
+      <p class="Section-paragraph">
+        The first thing I thought about was to create the needed <span class="u-highlight">guard clauses</span> so I would let the main algorithm logic
+        <span class="u-highlight">clean from all the concerns</span> that would only make it dirtier
+      </p>
+      <figure class="Code u-vertical-space-top">
+        <pre>
+          <code>
+            <span class="Code-comments">// Truncate `from` because we can't secure that it's an integer</span>
+            <span class="Code-keyword">var</span> _fromTruncated = <span class="Code-keyword">Math</span><span class="Code-punctuation">.</span>trunc<span class="Code-punctuation">(</span>from<span class="Code-punctuation">);</span>
+            <span class="Code-keyword">if</span> <span class="Code-punctuation">(</span>searchValue <span class="Code-punctuation">===</span> <span class="Code-string">''</span> <span class="Code-punctuation">&&</span> _fromTruncated <span class="Code-punctuation"><</span> 0<span class="Code-punctuation">) {</span>
+              <span class="Code-keyword">return</span> 0;
+            <span class="Code-punctuation">}</span>
+
+            <span class="Code-keyword">if</span> <span class="Code-punctuation">(</span>searchValue <span class="Code-punctuation">===</span> <span class="Code-string">''</span> <span class="Code-punctuation">&&</span> _fromTruncated <span class="Code-punctuation">>=</span> <span class="Code-keyword">this</span><span class="Code-punctuation">.</span>length<span class="Code-punctuation">) {</span>
+              <span class="Code-keyword">return</span> <span class="Code-keyword">this</span><span class="Code-punctuation">.</span>length;
+            <span class="Code-punctuation">}</span>
+
+            <span class="Code-keyword">if</span> <span class="Code-punctuation">(</span>searchValue <span class="Code-punctuation">===</span> <span class="Code-string">''</span><span class="Code-punctuation">) {</span>
+              <span class="Code-keyword">return</span> _fromTruncated<span class="Code-punctuation">;</span>
+            <span class="Code-punctuation">}</span>
+          </code>
+        </pre>
+      </figure>
+    </div>
+  </main>
 
   <script src="src/indexOf.js"></script>
   <script src="src/index.js"></script>

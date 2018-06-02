@@ -1,0 +1,16 @@
+:root {
+  --font-family-main: 'Raleway', sans-serif;
+  --font-family-handwritten: 'Amatic SC', cursive;
+  --font-family-monospace: monospace;
+  --HeaderPage-corner-text-distance: 15px;
+  --HeaderPage-corner-text-distance-tablet: 30px;
+
+  --color-turquoise: #74ebd5;
+  --color-violet: #ACB6E5;
+  --color-black: #1a1a1a;
+  --color-code-default: #a5cee1;
+  --color-code-commments: #77858c;
+  --color-code-string: #4db277;
+  --color-code-keyword: #62b1d8;
+  --color-code-punctuation: #e1e6e9;
+}

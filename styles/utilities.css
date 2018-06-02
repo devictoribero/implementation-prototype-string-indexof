@@ -1,0 +1,10 @@
+.u-highlight {
+ background: var(--color-violet);
+ padding: 0 5px;
+ border-radius: 3px;
+ opacity: 0.7;
+}
+
+.u-vertical-space-top {
+ margin-top: 20px;
+}

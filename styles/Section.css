@@ -1,5 +1,5 @@
 .Section {
-  padding: 15px;
+  padding: 30px 15px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -7,4 +7,15 @@
 
 .Section-title {
   color: var(--color-violet);
+  font-weight: bold;
+  font-size: 2.5rem;
+  font-family: var(--font-family-main);
+  margin-bottom: 10px;
+}
+
+.Section-paragraph {
+  font-family: var(--font-family-main);
+  font-weight: 200;
+  font-size: 1rem;
+  line-height: 1.3rem;
 }
