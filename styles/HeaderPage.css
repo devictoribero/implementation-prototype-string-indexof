@@ -1,0 +1,108 @@
+:root {
+  --font-family-main: 'Raleway', sans-serif;
+  --font-family-handwritten: 'Amatic SC', cursive;
+  --HeaderPage-corner-text-distance: 15px;
+  --HeaderPage-corner-text-distance-tablet: 30px;
+
+  --color-turquoise: #74ebd5;
+  --color-violet: #ACB6E5;
+}
+
+.HeaderPage {
+  width: 100%;
+  background: var(--color-turquoise);
+  background: -webkit-linear-gradient(to right, var(--color-violet), var(--color-turquoise));
+  background: linear-gradient(to right, var(--color-violet), var(--color-turquoise));
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 100vh;
+  border: 15px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.HeaderPage-mainTitle {
+  font-family: var(--font-family-handwritten);
+  color: white;
+  font-weight: bold;
+  font-size: 3.5rem;
+  text-align: center;
+  margin-bottom: 20%;
+}
+
+.HeaderPage-slogan {
+  display: block;
+  margin-top: 5px;
+  font-size: 1.5rem;
+}
+
+.HeaderPage-media,
+.HeaderPage-author {
+  right: var(--HeaderPage-corner-text-distance);
+}
+
+.HeaderPage-media {
+  position: absolute;
+  top: var(--HeaderPage-corner-text-distance);
+}
+
+.HeaderPage-mediaElement {
+  color: white;
+  text-decoration: none;
+  font-size: 2rem;
+}
+
+.HeaderPage-author {
+  font-family: var(--font-family-handwritten);
+  color: white;
+  position: absolute;
+  bottom: var(--HeaderPage-corner-text-distance);
+  font-size: 1.5rem;
+}
+
+@media screen and (min-width: 550px) {
+  .HeaderPage-mainTitle {
+    margin: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .HeaderPage {
+    border-width: 20px;
+  }
+
+  .HeaderPage-mainTitle {
+    font-size: 5rem;
+    margin-bottom: 200px;
+  }
+
+  .HeaderPage-slogan {
+    font-size: 2rem;
+  }
+
+  .HeaderPage-media,
+  .HeaderPage-author {
+    right: var(--HeaderPage-corner-text-distance-tablet);
+  }
+
+  .HeaderPage-media {
+    top: var(--HeaderPage-corner-text-distance-tablet);
+  }
+
+  .HeaderPage-mediaElement {
+    font-size: 3rem;
+  }
+
+  .HeaderPage-author {
+    bottom: var(--HeaderPage-corner-text-distance-tablet);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .HeaderPage-mainTitle {
+    margin: 0;
+  }
+}
